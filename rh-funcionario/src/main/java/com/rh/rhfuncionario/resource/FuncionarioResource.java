@@ -2,6 +2,9 @@ package com.rh.rhfuncionario.resource;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,11 +17,14 @@ import com.rh.rhfuncionario.repository.FuncionarioRepository;
 @RestController
 @RequestMapping(value = "/funcionario")
 public class FuncionarioResource {
+	
+	private final static Logger logger = LoggerFactory.getLogger(FuncionarioResource.class);
+	private final FuncionarioRepository funcionarioRepository;
+	private final Environment env;
 
-	private FuncionarioRepository funcionarioRepository;
-
-	public FuncionarioResource(FuncionarioRepository funcionarioRepository) {
+	public FuncionarioResource(FuncionarioRepository funcionarioRepository, Environment env) {
 		this.funcionarioRepository = funcionarioRepository;
+		this.env = env;
 	}
 
 	@GetMapping
@@ -29,6 +35,9 @@ public class FuncionarioResource {
 
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Funcionario> buscarPorId(@PathVariable Long id) {
+		
+		logger.info("porta: "+env.getProperty("local.server.port"));
+		
 		var funcionario = funcionarioRepository.findById(id);
 		return funcionario.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
 	}
