@@ -19,8 +19,7 @@ public class FuncionarioServiceInstanceListSupplier implements ServiceInstanceLi
 	@Override
 	public Flux<List<ServiceInstance>> get() {
 		List<ServiceInstance> instances = Arrays.asList(
-				new DefaultServiceInstance(getServiceId() + "1", "hr-funcionario", "localhost", 8081, false),
-				new DefaultServiceInstance(getServiceId() + "2", "hr-funcionario", "localhost", 8082, false));
+				new DefaultServiceInstance(getServiceId() + "1", "hr-funcionario", "localhost", 8081, false));
 		return Flux.just(instances);
 	}
 
