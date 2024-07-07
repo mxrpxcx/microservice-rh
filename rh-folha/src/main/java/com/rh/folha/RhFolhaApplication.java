@@ -8,9 +8,9 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 import com.rh.folha.configuration.LoadBalancerConfiguration;
 
-@EnableDiscoveryClient
 //@LoadBalancerClient(name = "rh-funcionario", configuration = LoadBalancerConfiguration.class)
 @SpringBootApplication
+@EnableDiscoveryClient
 @EnableFeignClients
 public class RhFolhaApplication {
 
