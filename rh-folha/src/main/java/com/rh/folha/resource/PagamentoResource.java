@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.rh.folha.entity.Pagamento;
 import com.rh.folha.service.PagamentoService;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+
 @RestController
 @RequestMapping(value = "/pagamento")
 public class PagamentoResource {
@@ -24,6 +26,5 @@ public class PagamentoResource {
 		var pagamento = pagamentoService.getPagamentos(idFuncionario, dias);
 		return ResponseEntity.ok(pagamento);
 	}
-	
 	
 }

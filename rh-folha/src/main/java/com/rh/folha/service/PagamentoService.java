@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import com.rh.folha.entity.Pagamento;
 import com.rh.folha.feignclient.FuncionarioFeignClient;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+
 @Service
 public class PagamentoService {
 
@@ -18,5 +20,5 @@ public class PagamentoService {
 		var func = funcionarioFeignClient.buscarPorId(idFuncionario).getBody();
 		return new Pagamento(func.getNome(), func.getRendimentoDiario(), dias);
 	}
-
+	
 }

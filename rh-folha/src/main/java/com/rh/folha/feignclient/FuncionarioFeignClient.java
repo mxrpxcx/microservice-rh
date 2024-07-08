@@ -9,10 +9,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import com.rh.folha.entity.Funcionario;
 
 @Component
-@FeignClient(name = "rh-funcionario", path = "/funcionario")
+@FeignClient(name = "rh-funcionario", path = "/funcionario", fallback = FuncionarioFeignClientFallback.class)
 public interface FuncionarioFeignClient {
-	
+
 	@GetMapping(value = "/{id}")
 	ResponseEntity<Funcionario> buscarPorId(@PathVariable Long id);
 
 }
+
+
